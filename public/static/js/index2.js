@@ -1,0 +1,1 @@
+alert('call index2.js')
