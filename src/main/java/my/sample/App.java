@@ -7,6 +7,7 @@ import org.jooby.Result;
 import org.jooby.Results;
 import org.jooby.mvc.GET;
 import org.jooby.mvc.Path;
+import org.jooby.thymeleaf.Thl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -134,6 +135,10 @@ public class App extends Jooby {
     {
         use(MyRoutes.class);
         use(MyRoutesWithHtml.class);
+
+        //thymeleaf_controller
+        use(new Thl());
+        use(WebController.class);
         assets("/home", "home.html");
         get("/home_page", (req, rsp) ->
         {
@@ -144,28 +149,26 @@ public class App extends Jooby {
     {
         {
 
-            assets("/foo", "foo.html");
-            assets("/bar", "bar.html");
-            use("*", (req, rsp, chain) -> {
-                if (req.hostname().equals("foo.com")) {
-                    chain.next("/foo-branding", req, rsp);
-                } else {
-                    chain.next("/bar-branding", req, rsp);
-                }
-            });
-
-            get("/foobar", () -> Results.html("foo")).name("foo-branding");
-
-            get("/foobar", () -> Results.html("bar")).name("bar-branding");
-                    get("/search", req -> {
-                        return "aaal";
-        });
+//            assets("/foo", "foo.html");
+//            assets("/bar", "bar.html");
+//            use("*", (req, rsp, chain) -> {
+//                if (req.hostname().equals("foo.com")) {
+//                    chain.next("/foo-branding", req, rsp);
+//                } else {
+//                    chain.next("/bar-branding", req, rsp);
+//                }
+//            });
+//
+//            get("/foobar", () -> Results.html("foo")).name("foo-branding");
+//
+//            get("/foobar", () -> Results.html("bar")).name("bar-branding");
+//                    get("/search", req -> {
+//                        return "aaal";
+//        });
 
         }
     }
 
-    {
-   }
 
     {
         onStart(() -> {

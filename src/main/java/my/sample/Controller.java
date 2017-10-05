@@ -27,6 +27,7 @@ public class Controller extends Jooby {
 
   // optional parameter
   Optional<String> optStr = req.param("optional").toOptional();
+  return "test";
 });
   }
   @GET
