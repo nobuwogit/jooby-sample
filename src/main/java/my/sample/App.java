@@ -1,13 +1,18 @@
 package my.sample;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import com.typesafe.config.Config;
+import my.sample.data.DataSource;
 import my.sample.module.MyModule;
 import org.jooby.Jooby;
 import org.jooby.Result;
 import org.jooby.Results;
+import org.jooby.jooq.jOOQ;
 import org.jooby.mvc.GET;
 import org.jooby.mvc.Path;
 import org.jooby.thymeleaf.Thl;
+import org.jooq.DSLContext;
+import org.jooq.impl.DSL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -135,7 +140,11 @@ public class App extends Jooby {
     {
         use(MyRoutes.class);
         use(MyRoutesWithHtml.class);
+        //jooq
+          use(new jOOQ());
 
+        //postgres接続
+        use(new DataSource());
         //thymeleaf_controller
         use(new Thl());
         use(WebController.class);
